@@ -23,7 +23,7 @@ def transcribe_audio(filename : str | Path) -> str :
     # import the audio
     audio_file = sr.AudioFile(str(filename))
 
-    #convert the audio file to audio data
+    #open and convert the audio file to audio data
     with audio_file as source :
         audio_data = recognizer.record(source)
 
