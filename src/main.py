@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.transcription import transcribe_audio
+from src.transcription import transcribe_audio, get_audio_information
 from src.sentiment import analyze_sentiment
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -13,10 +13,19 @@ def main() -> None:
 
     # PART1 : AUDIO TRANSCCRIPTION
 
-
+    #transcribe the audio
     transcript = transcribe_audio(AUDIO_PATH)
     print("Transcript:")
     print(transcript)
+
+    #read audio technical info
+    frame_rate, number_channels = get_audio_information(AUDIO_PATH)
+
+    print("\nFrame rate: ")
+    print(frame_rate)
+
+    print('\nNumber of channels: ')
+    print(number_channels)
 
     # PART2 : SENTIMENT ANALYSIS
    

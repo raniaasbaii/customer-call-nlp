@@ -1,5 +1,35 @@
 from pathlib import Path
+
+from pydub import AudioSegment
+
 import speech_recognition as sr
+
+def get_audio_information(filename : str | Path) -> tuple[int,int]:
+    """
+   return the rate and the number of channels of an audio file
+    
+    :param filename: path to the audio file
+    :type filename: str | Path
+    :return: a tuple containing : frame rate and number of channels
+    """
+
+    filename = Path(filename)
+
+    #check if th efile exists 
+    if not filename.exists():
+        raise FileNotFoundError(f"Audio file not found: {filename}")
+    
+    #load the audio file with pydub
+    audio = AudioSegment.from_file(filename)
+
+    #get number of audio samples
+    frame_rate = audio.frame_rate
+
+    #get number of channels 
+    number_channels = audio.channels
+
+    return frame_rate, number_channels
+
 
 def transcribe_audio(filename : str | Path) -> str :
     """Convert a wav audio into text using google speech recognition.
