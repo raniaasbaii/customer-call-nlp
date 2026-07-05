@@ -74,7 +74,8 @@ def main() -> None:
     print(f'\nMost similar transcription to "{query}" :')
     print(most_similar)
 
-
+# Command to run:
+# python3 -m src.main
 if __name__ == "__main__":
     main()
 
