@@ -4,6 +4,7 @@ import pandas as pd
 
 from src.transcription import transcribe_audio, get_audio_information
 from src.sentiment import analyze_sentiment
+from src.entities import find_most_frequent_entity
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 AUDIO_PATH = PROJECT_ROOT / "data" / "sample_customer_call.wav"
@@ -58,6 +59,11 @@ def main() -> None:
     print("\nTrue positive sentiment predictions:")
     print(true_positive)   
 
+    # PART 3 : MOST FREQUENTS ENTITY
+    most_freq_ent = find_most_frequent_entity(calls["text"])
+
+    print("\n Most frequent named entity :")
+    print(most_freq_ent)
 
 if __name__ == "__main__":
     main()
