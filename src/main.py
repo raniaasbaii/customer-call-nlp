@@ -5,6 +5,7 @@ import pandas as pd
 from src.transcription import transcribe_audio, get_audio_information
 from src.sentiment import analyze_sentiment
 from src.entities import find_most_frequent_entity
+from src.similarity import find_most_similar_text
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 AUDIO_PATH = PROJECT_ROOT / "data" / "sample_customer_call.wav"
@@ -55,7 +56,7 @@ def main() -> None:
         if true_label == "positive" and predicted_label == "positive":
             true_positive += 1
 
-     # Print the final result required by the project.
+
     print("\nTrue positive sentiment predictions:")
     print(true_positive)   
 
@@ -64,6 +65,15 @@ def main() -> None:
 
     print("\n Most frequent named entity :")
     print(most_freq_ent)
+
+    # PART : FIND MOST SIMILAR TEXT
+
+    query = "wrong package delivery"
+    most_similar = find_most_similar_text(query, calls["text"])
+
+    print(f'\nMost similar transcription to "{query}" :')
+    print(most_similar)
+
 
 if __name__ == "__main__":
     main()
